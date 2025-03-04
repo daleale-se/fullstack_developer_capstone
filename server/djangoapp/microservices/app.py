@@ -5,6 +5,7 @@ app = Flask("Sentiment Analyzer")
 
 sia = SentimentIntensityAnalyzer()
 
+
 @app.get('/')
 def home():
     return "Welcome to the Sentiment Analyzer. \

@@ -13,9 +13,7 @@ const dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'))
 
 mongoose.connect("mongodb://mongo_db:27017/",{'dbName':'dealershipsDB'});
 
-
 const Reviews = require('./review');
-
 const Dealerships = require('./dealership');
 
 try {
@@ -29,7 +27,6 @@ try {
 } catch (error) {
   res.status(500).json({ error: 'Error fetching documents' });
 }
-
 
 // Express route to home
 app.get('/', async (req, res) => {
@@ -49,7 +46,7 @@ app.get('/fetchReviews', async (req, res) => {
 // Express route to fetch reviews by a particular dealer
 app.get('/fetchReviews/dealer/:id', async (req, res) => {
   try {
-    const documents = await Reviews.find({dealership: req.params.id});
+    const documents = await Reviews.find({dealership: Number(req.params.id)});
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching documents' });
@@ -67,7 +64,7 @@ app.get('/fetchDealers', async (req, res) => {
 });
 
 // Express route to fetch Dealers by a particular state
-app.get('/fetchDealers/:state', async (req, res) => {
+app.get('/fetchDealers/state/:state', async (req, res) => {
     try {
         const documents = await Dealerships.find({state: req.params.state});
         res.json(documents);
@@ -77,9 +74,9 @@ app.get('/fetchDealers/:state', async (req, res) => {
 });
 
 // Express route to fetch dealer by a particular id
-app.get('/fetchDealers/:id', async (req, res) => {
+app.get('/fetchDealers/id/:id', async (req, res) => {
     try {
-        const documents = await Dealerships.find({id: req.params.id});
+        const documents = await Dealerships.find({id: Number(req.params.id)});
         res.json(documents);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching documents' });

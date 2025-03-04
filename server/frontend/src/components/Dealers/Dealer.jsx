@@ -10,7 +10,6 @@ import Header from '../Header/Header';
 
 const Dealer = () => {
 
-
   const [dealer, setDealer] = useState({});
   const [reviews, setReviews] = useState([]);
   const [unreviewed, setUnreviewed] = useState(false);
@@ -25,10 +24,15 @@ const Dealer = () => {
   let post_review = root_url+`postreview/${id}`;
   
   const get_dealer = async ()=>{
+
+    console.log("Fetching dealer:", dealer_url);  // Log the URL being fetched
+
     const res = await fetch(dealer_url, {
       method: "GET"
     });
     const retobj = await res.json();
+
+    console.log("Dealer response:", retobj);  // Log response
     
     if(retobj.status === 200) {
       let dealerobjs = Array.from(retobj.dealer)
@@ -37,10 +41,15 @@ const Dealer = () => {
   }
 
   const get_reviews = async ()=>{
+
+    console.log("Fetching reviews:", reviews_url);  // Log the URL being fetched
+
     const res = await fetch(reviews_url, {
       method: "GET"
     });
     const retobj = await res.json();
+
+    console.log("Reviews response:", retobj);  // Log response
     
     if(retobj.status === 200) {
       if(retobj.reviews.length > 0){

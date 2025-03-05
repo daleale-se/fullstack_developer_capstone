@@ -1,9 +1,11 @@
 from .models import CarMake, CarModel
 
+
 def initiate():
     car_make_data = [
-        {"name": "NISSAN", "description": "Great cars. Japanese technology", 
-         "logo_url": "https://banner2.cleanpng.com/20180413/oyw/avfea0dju.webp"},
+        {"name": "NISSAN", "description":
+         "Great cars. Japanese technology","logo_url":
+         "https://banner2.cleanpng.com/20180413/oyw/avfea0dju.webp"},
         {"name": "Mercedes", "description": "Great cars. German technology", 
          "logo_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg"},
         {"name": "Audi", "description": "Great cars. German technology", 

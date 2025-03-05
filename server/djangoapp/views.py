@@ -66,7 +66,7 @@ def registration(request):
 
     if username_exist:
         return JsonResponse({
-            "userName": username, 
+            "userName": username,
             "error": "Already Registered"})
 
     user = User.objects.create_user(
@@ -83,7 +83,10 @@ def registration(request):
 
 # Fetch dealerships (default to all states)
 def get_dealerships(request, state="All"):
-    endpoint = "/fetchDealers" if state == "All" else f"/fetchDealers/state/{state}"
+    if state == "All":
+        endpoint = "/fetchDealers" 
+    else:
+        endpoint = f"/fetchDealers/state/{state}"
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 

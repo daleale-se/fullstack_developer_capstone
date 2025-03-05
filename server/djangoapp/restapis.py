@@ -23,7 +23,7 @@ def get_request(endpoint, **kwargs):
     try:
         response = requests.get(request_url)
         return response.json()
-    except Exception as e::
+    except Exception as e:
         print(f"Error: {e}")
 
 

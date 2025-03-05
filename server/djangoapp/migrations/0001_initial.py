@@ -25,10 +25,11 @@ class Migration(migrations.Migration):
         ),
         migrations.CreateModel(
             name='CarModel',
-            fields=[ ('id', models.BigAutoField(auto_created=True,
-                                                primary_key=True,
-                                                serialize=False,
-                                                verbose_name='ID')),
+            fields=[
+                ('id', models.BigAutoField(auto_created=True,
+                                           primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
                 ('dealer_id', models.IntegerField()),
                 ('name', models.CharField(max_length=100)),
                 ('type', models.CharField(choices=[('Sedan', 'Sedan'),

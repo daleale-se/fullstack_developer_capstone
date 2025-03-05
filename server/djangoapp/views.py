@@ -6,6 +6,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .restapis import get_request, analyze_review_sentiments, post_review
+from django.contrib.auth.models import User
 
 
 # Get an instance of a logger
@@ -62,10 +63,11 @@ def registration(request):
     email = data["email"]
 
     username_exist = User.objects.filter(username=username).exists()
-    email_exist = User.objects.filter(email=email).exists()
 
     if username_exist:
-        return JsonResponse({"userName": username, "error": "Already Registered"})
+        return JsonResponse({
+            "userName": username, 
+            "error": "Already Registered"})
 
     user = User.objects.create_user(
         username=username,
@@ -122,5 +124,5 @@ def add_review(request):
         return JsonResponse({"status": 200})
     except Exception as e:
         return JsonResponse({
-            "status": 401, 
+            "status": 401,
             "message": f"Error in posting review: {str(e)}"})

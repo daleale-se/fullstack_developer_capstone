@@ -84,7 +84,7 @@ def registration(request):
 # Fetch dealerships (default to all states)
 def get_dealerships(request, state="All"):
     if state == "All":
-        endpoint = "/fetchDealers" 
+        endpoint = "/fetchDealers"
     else:
         endpoint = f"/fetchDealers/state/{state}"
     dealerships = get_request(endpoint)

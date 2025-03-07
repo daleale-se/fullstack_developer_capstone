@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 # Get all car models and their corresponding makes
 def get_cars(request):
     count = CarMake.objects.count()
-    print(count)
 
     if count == 0:
         initiate()
@@ -85,14 +84,14 @@ def get_dealerships(request, state="All"):
     endpoint = "/fetchDealers"
     if state != "All":
         endpoint = f"/fetchDealers/state/{state}"
-    
+
     dealerships = get_request(endpoint)
 
     if not dealerships or "error" in dealerships:  
         return JsonResponse({"status": 500,
         "error": dealerships.get("error",
         "Unknown error")}, status=500)
-    
+
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 

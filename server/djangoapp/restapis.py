@@ -18,15 +18,14 @@ def get_request(endpoint, **kwargs):
         params = "&".join(f"{key}={value}" for key, value in kwargs.items())
 
     request_url = backend_url + endpoint + ("?" + params if params else "")
-    print(f"GET from {request_url}")  # Debugging log
 
     try:
-        response = requests.get(request_url, headers={"User-Agent": "Mozilla/5.0"})
-        response.raise_for_status()  # Raise an error for HTTP errors (4xx, 5xx)
+        response = requests.get(request_url)
+        response.raise_for_status() 
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
-        return {"error": f"Request failed: {e}"}  # Return an error message instead of None
+        return {"error": f"Request failed: {e}"} 
 
 
 def analyze_review_sentiments(text):

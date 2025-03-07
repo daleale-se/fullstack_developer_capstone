@@ -31,8 +31,6 @@ const Dealer = () => {
       method: "GET"
     });
     const retobj = await res.json();
-
-    console.log("Dealer response:", retobj);  // Log response
     
     if(retobj.status === 200) {
       let dealerobjs = Array.from(retobj.dealer)
@@ -42,14 +40,10 @@ const Dealer = () => {
 
   const get_reviews = async ()=>{
 
-    console.log("Fetching reviews:", reviews_url);  // Log the URL being fetched
-
     const res = await fetch(reviews_url, {
       method: "GET"
     });
     const retobj = await res.json();
-
-    console.log("Reviews response:", retobj);  // Log response
     
     if(retobj.status === 200) {
       if(retobj.reviews.length > 0){

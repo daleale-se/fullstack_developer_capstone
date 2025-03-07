@@ -81,13 +81,18 @@ def registration(request):
     return JsonResponse({"userName": username, "status": "Authenticated"})
 
 
-# Fetch dealerships (default to all states)
 def get_dealerships(request, state="All"):
-    if state == "All":
-        endpoint = "/fetchDealers"
-    else:
+    endpoint = "/fetchDealers"
+    if state != "All":
         endpoint = f"/fetchDealers/state/{state}"
+    
     dealerships = get_request(endpoint)
+
+    if not dealerships or "error" in dealerships:  
+        return JsonResponse({"status": 500,
+        "error": dealerships.get("error",
+        "Unknown error")}, status=500)
+    
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 

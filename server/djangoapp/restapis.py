@@ -14,17 +14,19 @@ sentiment_analyzer_url = os.getenv(
 def get_request(endpoint, **kwargs):
     params = ""
 
-    if (kwargs):
-        for key, value in kwargs.items():
-            params = params + key + "=" + value + "&"
+    if kwargs:
+        params = "&".join(f"{key}={value}" for key, value in kwargs.items())
 
-    request_url = backend_url + endpoint + "?" + params
-    print("GET from {} ".format(request_url))
+    request_url = backend_url + endpoint + ("?" + params if params else "")
+    print(f"GET from {request_url}")  # Debugging log
+
     try:
-        response = requests.get(request_url)
+        response = requests.get(request_url, headers={"User-Agent": "Mozilla/5.0"})
+        response.raise_for_status()  # Raise an error for HTTP errors (4xx, 5xx)
         return response.json()
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
+        return {"error": f"Request failed: {e}"}  # Return an error message instead of None
 
 
 def analyze_review_sentiments(text):

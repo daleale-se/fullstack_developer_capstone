@@ -87,10 +87,12 @@ def get_dealerships(request, state="All"):
 
     dealerships = get_request(endpoint)
 
-    if not dealerships or "error" in dealerships:  
-        return JsonResponse({"status": 500,
-        "error": dealerships.get("error",
-        "Unknown error")}, status=500)
+    if not dealerships or "error" in dealerships:
+        return JsonResponse(
+            {
+                "status": 500,
+                "error": dealerships.get("error", "Unknown error")
+            }, status=500)
 
     return JsonResponse({"status": 200, "dealers": dealerships})
 

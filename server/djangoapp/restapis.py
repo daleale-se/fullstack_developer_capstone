@@ -21,11 +21,11 @@ def get_request(endpoint, **kwargs):
 
     try:
         response = requests.get(request_url)
-        response.raise_for_status() 
+        response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
-        return {"error": f"Request failed: {e}"} 
+        return {"error": f"Request failed: {e}"}
 
 
 def analyze_review_sentiments(text):
